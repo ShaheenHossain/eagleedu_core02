@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record id="view_eedustudent_abedon_form" model="ir.ui.view">
+        <field name="name">eedustudent.abedon.form</field>
+        <field name="model">eedustudent.abedon</field>
+        <field name="arch" type="xml">
+            <form string="Student abedon">
+                    <sheet>
+                         <field name="eedustudent_image" widget="image" class="oe_avatar"/>
+                            <div col="8" class = "oe_title">
+                              <h3>
+                                <group>
+                                  <field name="eedustudent_abedon_id"/>
+                                  <field name="eedustudent_name" placeholder="Student Name English (CAPITAL)" required="1"/>
+                                  <field name="eedustudent_name_b" placeholder="বাংলায় শিক্ষার্থীর নাম"/>
+                                </group>
+                              </h3>
+                            </div>
+                                <group string="Personal Details">
+                                    <field name="date_of_birth"/>
+                                    <field name="eedustudent_gender"/>
+                                    <field name="nationality"/>
+                                </group>
+                                <group col="4" string="Father's Details">
+                                    <field name="eedustudent_father_name"/>
+                                    <field name="eedustudent_father_name_b"/>
+                                    <field name="father_mobile"/>
+                                </group>
+                                <group col="4" string="Mother's Details">
+                                    <field name="eedustudent_mother_name"/>
+                                    <field name="eedustudent_mother_name_b"/>
+                                    <field name="mother_mobile"/>
+                                </group>
+                                <group col="4" string="Present Address">
+                                    <field name="house_no"/>
+                                    <field name="road_no"/>
+                                    <field name="city"/>
+                                    <field name="division"/>
+                                    <field name="country_id"/>
+                                </group>
+                         <label for="is_same_address" class="oe_inline"/>
+                        <!--<field name="is_same_address" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                        <div name="permanent_address" attrs="{'readonly': [('state', '=', 'done')],'invisible': [('is_same_address','=', True)]}">-->
+                          <separator string="Permanent Address"/>
+
+                                <group col="4" string="Permanent Address">
+                                    <field name="per_village"/>
+                                    <field name="per_po"/>
+                                    <field name="per_ps"/>
+                                    <field name="per_dist"/>
+                                    <field name="per_country_id"/>
+
+                                </group>
+                    </sheet>
+               </form>
+        </field>
+    </record>
+
+    <record id="seq_eedustudent_abedon" model="ir.sequence">
+        <field name="name">Stuent Abedon Seq</field>
+        <field name="res_model">eedustudent.abedon</field>
+        <field name="code">eedustudent.abedon</field>
+        <field name="prefix">SA</field>
+        <field name="number_increment">1</field>
+        <field name="padding">6</field>
+    </record>
+
+    <record id="view_eedustudent_abedon_tree" model="ir.ui.view">
+        <field name="name">eedustudent.abedon.tree</field>
+        <field name="model">eedustudent.abedon</field>
+        <field name="arch" type="xml">
+               <tree string="Abedon No.">
+                    <field name="eedustudent_abedon_id"/>
+                    <field name="eedustudent_name"/>
+                    <field name="date_of_birth"/>
+                    <field name="eedustudent_father_name"/>
+                    <field name="eedustudent_mother_name"/>
+                    <field name="eedustudent_abedon_id"/>
+
+               </tree>
+        </field>
+    </record>
+
+
+
+     <record id="action_eedustudent_abedon" model="ir.actions.act_window">
+        <field name="name">Student Abedon</field>
+        <field name="res_model">eedustudent.abedon</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html"> <p> nothing</p></field>
+    </record>
+
+    <menuitem id="eedustudent_parent_menu_id" name="Eedu Education" sequence="10"/>
+
+    <menuitem id="eedustudent_abedon_menu_id" name="Student abedon"
+            parent="eedustudent_parent_menu_id" action="action_eedustudent_abedon"/>
+
+</odoo>
