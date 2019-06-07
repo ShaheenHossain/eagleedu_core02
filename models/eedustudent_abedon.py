@@ -36,11 +36,17 @@ class EedustudentAbedon(models.Model):
     road_no = fields.Char(string='Area/Road No.', help="Enter the Area or Road No.")
     post_office = fields.Char(string='Post Office', help="Enter the Post Office Name")
     city = fields.Char(string='City', help="Enter the City name")
-    division = fields.Selection([('dhaka', 'Dhaka'), ('chattagram', 'Chattagram'), ('khulna', 'Khulna'),
-                ('rajshahi', 'Rajshahi'), ('sylhet', 'Sylhet'), ('barishal', 'Barishal'),
-                ('mymensingh', 'Mymensingh'), ('rangpur', 'Rangpur')],
-                string='Division', required=False, track_visibility='onchange',
-                help="Your Divistion is ")
+    # division = fields.Selection([('dhaka', 'Dhaka'), ('chattagram', 'Chattagram'), ('khulna', 'Khulna'),
+    #             ('rajshahi', 'Rajshahi'), ('sylhet', 'Sylhet'), ('barishal', 'Barishal'),
+    #             ('mymensingh', 'Mymensingh'), ('rangpur', 'Rangpur')],
+    #             string='Division', required=False, track_visibility='onchange',
+    #             help="Your Divistion is ")
+
+    #bddivision_id = fields.Many2one(string= 'Division', ondelete='restrict')
+
+    #state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict',
+    #                                         help="Select the State where you are from")
+    bd_division_id = fields.Many2one('eedustudent.bddivision', string= 'Division')
 
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19,
                                  help="Select the Country")
@@ -49,8 +55,9 @@ class EedustudentAbedon(models.Model):
     per_village = fields.Char(string='Village Name', help="Enter the Village Name")
     per_po = fields.Char(string='Post Office Name', help="Enter the Post office Name ")
     per_ps = fields.Char(string='Police Station', help="Enter the Police Station Name")
-    per_dist = fields.Char(string='District', help="Enter the City of District name")
-    per_country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19,
+    per_dist_id = fields.Many2one('eedustudent.bddistrict', string='District', help="Enter the City of District name")
+
+    per_country_id = fields.Many2one('res.country', string='Country', ondelete='restrict', default=19,
                                      help="Select the Country")
     guardian_name = fields.Char(string="Guardian's Name", help="Proud to say my guardian is")
 
@@ -68,8 +75,18 @@ class EedustudentAbedon(models.Model):
          return result
 
 
-# class eedustudentReligious(models.Model):
-#         _name = 'eedustudent.religious'
-#         name = fields.Char()
-#
+
+class EedustudentBddivision(models.Model):
+    _name = 'eedustudent.bddivision'
+    name = fields.Char()
+
+class EedustudentBddistrict(models.Model):
+    _name = 'eedustudent.bddistrict'
+    name = fields.Char()
+
+class eedustudentReligious(models.Model):
+    _name = 'eedustudent.religious'
+    name = fields.Char()
+
+
 #         religious_id = fields.Many2one('eedustudent.religious', string="Religious", help="My Religion is ")

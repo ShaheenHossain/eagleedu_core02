@@ -21,6 +21,7 @@
                                     <field name="date_of_birth"/>
                                     <field name="eedustudent_gender"/>
                                     <field name="nationality"/>
+                                    <field name="religious_id"/>
                                 </group>
                                 <group col="4" string="Father's Details">
                                     <field name="eedustudent_father_name"/>
@@ -36,7 +37,7 @@
                                     <field name="house_no"/>
                                     <field name="road_no"/>
                                     <field name="city"/>
-                                    <field name="division"/>
+                                    <field name="bd_division_id"/>
                                     <field name="country_id"/>
                                 </group>
                          <label for="is_same_address" class="oe_inline"/>
@@ -48,7 +49,7 @@
                                     <field name="per_village"/>
                                     <field name="per_po"/>
                                     <field name="per_ps"/>
-                                    <field name="per_dist"/>
+                                    <field name="per_dist_id"/>
                                     <field name="per_country_id"/>
 
                                 </group>
@@ -76,8 +77,6 @@
                     <field name="date_of_birth"/>
                     <field name="eedustudent_father_name"/>
                     <field name="eedustudent_mother_name"/>
-                    <field name="eedustudent_abedon_id"/>
-
                </tree>
         </field>
     </record>

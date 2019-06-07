@@ -28,6 +28,8 @@
         'views/views.xml',
         'views/eedustudent_abedon.xml',
         'views/templates.xml',
+        #'data/bddivision.bddivision.csv',
+        #'data/edustudent.district.csv',
     ],
     # only loaded in demonstration mode
     'demo': [
