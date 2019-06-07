@@ -79,6 +79,13 @@ class EedustudentAbedon(models.Model):
          result = super(EedustudentAbedon, self).create(vals)
          return result
 
+    def approve_call(self):
+        print("this is the button for approve")
+
+    def reject_call(self):
+        print("this is the button for approve")
+
+
 # class EedustudentDocuments(models.Model):
 #     _name = 'eedustudent.neccessay_documents'
 #     _description = "Student Documents"

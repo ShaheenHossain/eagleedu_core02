@@ -9,8 +9,9 @@
                 <header>
                 <button nane="approve_call" type="object" string="Approve" class="btn btn-primary"/>
                 <button nane="reject_call" type="object" string="Reject" class="btn btn-warning"/>
-                </header>
+                    <field name='status' widget="statusbar"/>
 
+                </header>
                     <sheet>
                          <field name="eedustudent_image" widget="image" class="oe_avatar"/>
                             <div col="8" class = "oe_title">
@@ -66,8 +67,6 @@
                                 </group>
                     </sheet>
                 <footer>
-                    <button nane="approve_call" type="object" string="Approve" class="btn btn-primary"/>
-                    <button nane="reject_call" type="object" string="Reject" class="btn btn-warning"/>
                 </footer>
                </form>
         </field>
