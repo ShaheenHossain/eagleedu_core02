@@ -44,16 +44,6 @@ class EedustudentAbedon(models.Model):
     road_no = fields.Char(string='Area/Road No.', help="Enter the Area or Road No.")
     post_office = fields.Char(string='Post Office', help="Enter the Post Office Name")
     city = fields.Char(string='City', help="Enter the City name")
-    # division = fields.Selection([('dhaka', 'Dhaka'), ('chattagram', 'Chattagram'), ('khulna', 'Khulna'),
-    #             ('rajshahi', 'Rajshahi'), ('sylhet', 'Sylhet'), ('barishal', 'Barishal'),
-    #             ('mymensingh', 'Mymensingh'), ('rangpur', 'Rangpur')],
-    #             string='Division', required=False, track_visibility='onchange',
-    #             help="Your Divistion is ")
-
-    #bddivision_id = fields.Many2one(string= 'Division', ondelete='restrict')
-
-    #state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict',
-    #                                         help="Select the State where you are from")
     bd_division_id = fields.Many2one('eedustudent.bddivision', string= 'Division')
 
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19,
@@ -72,18 +62,13 @@ class EedustudentAbedon(models.Model):
     religious_id = fields.Many2one('eedustudent.religious', string="Religious", help="My Religion is ")
 
 
-
-
-    # state = fields.Selection([('draft', 'Draft'), ('verification', 'Verify'),
-    #                           ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
-    #                          string='State', required=True, default='draft', track_visibility='onchange')
+    status = fields.Selection([('draft', 'Draft'), ('verification', 'Verify'),
+                               ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
+                              string='Status', required=True, default='draft', track_visibility='onchange')
     #
     # _sql_constraints = [
     #     ('unique_student_id', 'unique(student_id)', 'Student Id must be unique'),
     # ]
-
-
-
 
 
     @api.model
@@ -94,6 +79,21 @@ class EedustudentAbedon(models.Model):
          result = super(EedustudentAbedon, self).create(vals)
          return result
 
+# class EedustudentDocuments(models.Model):
+#     _name = 'eedustudent.neccessay_documents'
+#     _description = "Student Documents"
+#     _inherit = ['mail.thread']
+#
+#     @api.multi
+#     def send_to_verify(self):
+#         """Button action for sending the application for the verification"""
+#         for rec in self:
+#             document_ids = self.env['eedustudent.neccessay_documents']#.search([('application_ref', '=', rec.id)])
+#             if not document_ids:
+#                 raise ValidationError(_('No Documents provided'))
+#             rec.write({
+#                 'status': 'verification'
+#             })
 
 
 class EedustudentBddivision(models.Model):
