@@ -19,9 +19,13 @@
                             </div>
                                 <group string="Personal Details">
                                     <field name="date_of_birth"/>
+                                    <field name="abedon_date"/>
                                     <field name="eedustudent_gender"/>
+                                    <field name="st_blood_group"/>
                                     <field name="nationality"/>
                                     <field name="religious_id"/>
+                                    <field name="academic_year"/>
+
                                 </group>
                                 <group col="4" string="Father's Details">
                                     <field name="eedustudent_father_name"/>
@@ -40,9 +44,11 @@
                                     <field name="bd_division_id"/>
                                     <field name="country_id"/>
                                 </group>
-                         <label for="is_same_address" class="oe_inline"/>
-                        <!--<field name="is_same_address" attrs="{'readonly': [('state', '=', 'done')]}"/>
-                        <div name="permanent_address" attrs="{'readonly': [('state', '=', 'done')],'invisible': [('is_same_address','=', True)]}">-->
+                         <label for="if_same_address" class="oe_inline"/>
+<!--
+                        <field name="if_same_address" attrs="{'readonly': [('state', '=', 'done')]}"/>
+                        <div name="permanent_address" attrs="{'readonly': [('state', '=', 'done')],'invisible': [('if_same_address','=', True)]}">
+-->
                           <separator string="Permanent Address"/>
 
                                 <group col="4" string="Permanent Address">

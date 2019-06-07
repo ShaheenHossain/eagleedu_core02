@@ -11,8 +11,9 @@ class EedustudentAbedon(models.Model):
 
     #_inherit = 'res.partner'
 
+    eedustudent_abedon_id = fields.Char(string="Abedon No", readonly=True, required=True, copy=False, default='New')
 
-    abedon_date = fields.Datetime('abedon Date', default=lambda
+    abedon_date = fields.Datetime('Application Date', default=lambda
         self: fields.datetime.now())  # , default=fields.Datetime.now, required=True
 
     eedustudent_name = fields.Char(string='Student Name', required=True, help="Enter Name of Student")
@@ -28,9 +29,16 @@ class EedustudentAbedon(models.Model):
     eedustudent_gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('other', 'Other')],
                                 string='Gender', required=False, track_visibility='onchange',
                                 help="Your Gender is ")
+    st_blood_group = fields.Selection([('a+', 'A+'), ('a-', 'A-'), ('b+', 'B+'), ('o+', 'O+'), ('o-', 'O-'),
+                                    ('ab-', 'AB-'), ('ab+', 'AB+')],
+                                   string='Blood Group', track_visibility='onchange',
+                                   help="Your Blood Group is ")
 
     nationality = fields.Many2one('res.country', string='Nationality', ondelete='restrict',default=19,
                                 help="Select the Nationality")
+
+    academic_year = fields.Many2one('eedustudent.academicyear', string='Academic Year',
+                                       help="Choose Academic year for which the admission is choosing")
 
     house_no = fields.Char(string='House No.', help="Enter the House No.")
     road_no = fields.Char(string='Area/Road No.', help="Enter the Area or Road No.")
@@ -50,7 +58,7 @@ class EedustudentAbedon(models.Model):
 
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19,
                                  help="Select the Country")
-    is_same_address = fields.Boolean(string="Permanent Address same as above", default=True,
+    if_same_address = fields.Boolean(string="Permanent Address same as above", default=True,
                                      help="Tick the field if the Present and permanent address is same")
     per_village = fields.Char(string='Village Name', help="Enter the Village Name")
     per_po = fields.Char(string='Post Office Name', help="Enter the Post office Name ")
@@ -63,7 +71,19 @@ class EedustudentAbedon(models.Model):
 
     religious_id = fields.Many2one('eedustudent.religious', string="Religious", help="My Religion is ")
 
-    eedustudent_abedon_id = fields.Char(string="Abedon No", readonly=True, required=True, copy=False, default='New')
+
+
+
+    # state = fields.Selection([('draft', 'Draft'), ('verification', 'Verify'),
+    #                           ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
+    #                          string='State', required=True, default='draft', track_visibility='onchange')
+    #
+    # _sql_constraints = [
+    #     ('unique_student_id', 'unique(student_id)', 'Student Id must be unique'),
+    # ]
+
+
+
 
 
     @api.model
@@ -84,8 +104,12 @@ class EedustudentBddistrict(models.Model):
     _name = 'eedustudent.bddistrict'
     name = fields.Char()
 
-class eedustudentReligious(models.Model):
+class EedustudentReligious(models.Model):
     _name = 'eedustudent.religious'
+    name = fields.Char()
+
+class EedustudentAcademicyear(models.Model):
+    _name = 'eedustudent.academicyear'
     name = fields.Char()
 
 
