@@ -28,6 +28,8 @@
         'views/views.xml',
         'views/eedustudent_abedon.xml',
         'views/templates.xml',
+        'reports/print_reports.xml',
+        'reports/report_edustudent.xml',
         #'data/bddivision.bddivision.csv',
         #'data/edustudent.district.csv',
     ],
