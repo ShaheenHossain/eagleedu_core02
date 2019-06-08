@@ -79,28 +79,46 @@ class EedustudentAbedon(models.Model):
          result = super(EedustudentAbedon, self).create(vals)
          return result
 
+
+    @api.multi
     def approve_call(self):
-        print("this is the button for approve")
+        """Return the state to done if the documents are perfect"""
+        for rec in self:
+            rec.write({
+                'status': 'verification'
+            })
 
-    def reject_call(self):
-        print("this is the button for approve")
+    # @api.multi
+    # def approve_call(self):
+    #     """Return the state to done if the documents are perfect"""
+    #     for rec in self:
+    #         rec.write({
+    #             'status': 'approve'
+    #         })
 
 
-# class EedustudentDocuments(models.Model):
-#     _name = 'eedustudent.neccessay_documents'
-#     _description = "Student Documents"
-#     _inherit = ['mail.thread']
-#
-#     @api.multi
-#     def send_to_verify(self):
-#         """Button action for sending the application for the verification"""
-#         for rec in self:
-#             document_ids = self.env['eedustudent.neccessay_documents']#.search([('application_ref', '=', rec.id)])
-#             if not document_ids:
-#                 raise ValidationError(_('No Documents provided'))
-#             rec.write({
-#                 'status': 'verification'
-#             })
+    @api.multi
+    def application_verify(self):
+        """Verifying the student application. Return warning if no Documents
+         provided or if the provided documents are not in done state"""
+        for rec in self:
+            document_ids = self.env['education.documents'].search([('application_ref', '=', rec.id)])
+            if document_ids:
+                doc_status = document_ids.mapped('state')
+                if all(state in ('done', 'returned') for state in doc_status):
+                    rec.write({
+                        'verified_by': self.env.uid,
+                        'state': 'approve'
+                    })
+                else:
+                    raise ValidationError(_('All Documents are not Verified Yet, '
+                                            'Please complete the verification'))
+
+            else:
+                raise ValidationError(_('No Documents provided'))
+
+
+
 
 
 class EedustudentBddivision(models.Model):
