@@ -34,10 +34,10 @@
                                                         <strong><span>Father's Name:</span></strong>
                                                     </td>
                                                     <td>
-                                                        <span t-if="o.st_father_name" t-field="o.stu_father_name"/>
+                                                        <span t-if="o.st_father_name" t-field="o.st_father_name"/>
                                                     </td>
                                                     <td>
-                                                        <span t-if="o.st_father_name_b" t-field="o.stu_father_name_b"/>
+                                                        <span t-if="o.st_father_name_b" t-field="o.st_father_name_b"/>
                                                     </td>
                                                 </tr>
 
@@ -46,7 +46,7 @@
                                                         <strong><span>Mother's Name:</span></strong>
                                                     </td>
                                                     <td>
-                                                        <span t-if="o.st_mother_name" t-field="o.stu_mother_name"/>
+                                                        <span t-if="o.st_mother_name" t-field="o.st_mother_name"/>
                                                     </td>
                                                 </tr>
                                                  <tr>
@@ -54,7 +54,7 @@
                                                         <strong><span>মায়ের নাম:</span></strong>
                                                     </td>
                                                     <td>
-                                                        <span t-if="o.st_mother_name_b" t-field="o.stu_mother_name_b"/>
+                                                        <span t-if="o.st_mother_name_b" t-field="o.st_mother_name_b"/>
                                                     </td>
                                                 </tr>
                                                 <tr>
