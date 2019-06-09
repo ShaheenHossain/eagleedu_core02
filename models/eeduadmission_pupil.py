@@ -1,6 +1,4 @@
 from odoo import fields, models, api, _
-from odoo.exceptions import ValidationError
-from datetime import datetime
 
 class EeduadmissionPupil(models.Model):
     _name = 'eeduadmission.pupil'
@@ -70,3 +68,7 @@ class EeduadmissionPupil(models.Model):
     religious_id = fields.Many2one('eedustudent.religious', string="Religious", help="My Religion is ")
     pupil_id=fields.Char('Student Id')
     roll_no = fields.Integer('Roll No')
+
+    status = fields.Selection([('draft', 'Draft'), ('verification', 'Verify'),
+                               ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
+                              string='Status', required=True, default='draft', track_visibility='onchange')

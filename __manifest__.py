@@ -27,6 +27,7 @@
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/eedustudent_abedon.xml',
+        'views/eeduadmission_pupil.xml',
         'views/templates.xml',
         'reports/print_reports.xml',
         'reports/report_edustudent.xml',
