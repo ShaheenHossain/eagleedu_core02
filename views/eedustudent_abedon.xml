@@ -9,27 +9,34 @@
                 <header>
 
                      <button name="approve_call" type="object" class="oe_highlight"
-                            string="Send for Verification" status="draft"/>
+                            string="Send for Verification" groups="base.group_user"
+                             status="draft"/>
+                     <button name="for_verify" type="object" class="oe_highlight"
+                            string="Verify Application Form" groups="base.group_user"
+                             status="verification"/>
+                     <button name="admit_student" type="object" class="oe_highlight"
+                            string="Admit Student" groups="base.group_user"
+                             status="done"/>
 
 
                     <field name='status' widget="statusbar" statusbar_visible="draft,verification,approve,done"/>
 
                 </header>
                     <sheet>
-                         <field name="eedustudent_image" widget="image" class="oe_avatar"/>
+                         <field name="st_image" widget="image" class="oe_avatar"/>
                             <div col="8" class = "oe_title">
                               <h3>
                                 <group>
-                                  <field name="eedustudent_abedon_id"/>
-                                  <field name="eedustudent_name" placeholder="Student Name English (CAPITAL)" required="1"/>
-                                  <field name="eedustudent_name_b" placeholder="বাংলায় শিক্ষার্থীর নাম"/>
+                                  <field name="st_abedon_id"/>
+                                  <field name="st_name" placeholder="Student Name English (CAPITAL)" required="1"/>
+                                  <field name="st_name_b" placeholder="বাংলায় শিক্ষার্থীর নাম"/>
                                 </group>
                               </h3>
                             </div>
                                 <group string="Personal Details">
                                     <field name="date_of_birth"/>
                                     <field name="abedon_date"/>
-                                    <field name="eedustudent_gender"/>
+                                    <field name="st_gender"/>
                                     <field name="st_blood_group"/>
                                     <field name="nationality"/>
                                     <field name="religious_id"/>
@@ -37,13 +44,13 @@
 
                                 </group>
                                 <group col="4" string="Father's Details">
-                                    <field name="eedustudent_father_name"/>
-                                    <field name="eedustudent_father_name_b"/>
+                                    <field name="st_father_name"/>
+                                    <field name="st_father_name_b"/>
                                     <field name="father_mobile"/>
                                 </group>
                                 <group col="4" string="Mother's Details">
-                                    <field name="eedustudent_mother_name"/>
-                                    <field name="eedustudent_mother_name_b"/>
+                                    <field name="st_mother_name"/>
+                                    <field name="st_mother_name_b"/>
                                     <field name="mother_mobile"/>
                                 </group>
                                 <group col="4" string="Present Address">
@@ -93,11 +100,11 @@
         <field name="model">eedustudent.abedon</field>
         <field name="arch" type="xml">
                <tree string="Abedon No.">
-                    <field name="eedustudent_abedon_id"/>
-                    <field name="eedustudent_name"/>
+                    <field name="st_abedon_id"/>
+                    <field name="st_name"/>
                     <field name="date_of_birth"/>
-                    <field name="eedustudent_father_name"/>
-                    <field name="eedustudent_mother_name"/>
+                    <field name="st_father_name"/>
+                    <field name="st_mother_name"/>
                </tree>
         </field>
     </record>
