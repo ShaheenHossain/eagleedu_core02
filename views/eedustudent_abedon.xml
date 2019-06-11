@@ -14,7 +14,7 @@
                      <button name="for_verify" type="object" class="oe_highlight"
                             string="Verify Application Form" groups="base.group_user"
                              status="verification"/>
-                     <button name="admit_student" type="object" class="oe_highlight"
+                     <button name="admit_pupil" type="object" class="oe_highlight"
                             string="Admit Student" groups="base.group_user"
                              status="done"/>
 

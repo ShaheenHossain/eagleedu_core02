@@ -37,5 +37,12 @@
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
+        'base_demo.xml',
+        'res/res_currency_demo.xml',
+        'res/res_bank_demo.xml',
+        'res/res_partner_demo.xml',
+        'res/res_partner_demo.yml',
+        # 'res/res_partner_image_demo.xml',
+
     ],
 }

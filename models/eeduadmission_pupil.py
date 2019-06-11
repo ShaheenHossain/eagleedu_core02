@@ -2,10 +2,22 @@ from odoo import fields, models, api, _
 
 class EeduadmissionPupil(models.Model):
     _name = 'eeduadmission.pupil'
+    # _inherit = ['mail.thread']
     _inherits = {'res.partner': 'partner_id'}
     _description = 'Student record'
+    _rec_name = 'name'
 
-    # _rec_name = 'st_name'
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        if name:
+            recs = self.search([('name', operator, name)] + (args or []), limit=limit)
+            if not recs:
+                recs = self.search([('admission_no', operator, name)] + (args or []), limit=limit)
+            if not recs:
+                recs = self.search([('pupil_id', operator, name)] + (args or []), limit=limit)
+            return recs.name_get()
+        return super(EeduadmissionPupil, self).name_search(name, args=args, operator=operator, limit=limit)
+
 
     # _inherit = ['mail.thread']
 
@@ -66,9 +78,19 @@ class EeduadmissionPupil(models.Model):
     guardian_name = fields.Char(string="Guardian's Name", help="Proud to say my guardian is")
 
     religious_id = fields.Many2one('eedustudent.religious', string="Religious", help="My Religion is ")
+    admission_no = fields.Char(string="Admission Number", readonly=True)
+
     pupil_id=fields.Char('Student Id')
     roll_no = fields.Integer('Roll No')
 
     status = fields.Selection([('draft', 'Draft'), ('verification', 'Verify'),
                                ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
                               string='Status', required=True, default='draft', track_visibility='onchange')
+
+
+
+class EedustudentResPartner(models.Model):
+    _inherit = 'res.partner'
+    country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19)
+    is_pupil = fields.Boolean(string="Is a Student")
+    # is_parent = fields.Boolean(string="Is a Parent")

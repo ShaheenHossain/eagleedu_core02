@@ -100,7 +100,7 @@ class EedustudentAbedon(models.Model):
 
 
     @api.multi
-    def admit_student(self):
+    def admit_pupil(self):
         """Create student from the application and data and return the student"""
         for rec in self:
             values = {
@@ -132,8 +132,10 @@ class EedustudentAbedon(models.Model):
                 'guardian_name': rec.guardian_name,
                 'religious_id': rec.religious_id,
                 #'is_student': True,
+                'is_pupil': True,
                 'pupil_id': rec.pupil_id,
                 'roll_no': rec.roll_no,
+                'st_abedon_id': rec.st_abedon_id,
             }
             pupil = self.env['eeduadmission.pupil'].create(values)
             rec.write({
@@ -167,3 +169,11 @@ class EedustudentAcademicyear(models.Model):
     _name = 'eedustudent.academicyear'
     name = fields.Char()
 
+class EedustudentOrganization(models.Model):
+    _inherit = 'res.company'
+
+# class EedustudentResPartner(models.Model):
+#     _inherit = 'res.partner'
+#     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19)
+#     is_pupil = fields.Boolean(string="Is a Pupil")
+#     is_parent = fields.Boolean(string="Is a Parent")
