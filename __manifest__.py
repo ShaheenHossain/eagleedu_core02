@@ -28,6 +28,8 @@
         'views/views.xml',
         'views/eedustudent_abedon.xml',
         'views/eeduadmission_pupil.xml',
+        'views/eedustudent_student.xml',
+        'views/eedustudent_member.xml',
         'views/templates.xml',
         'reports/print_reports.xml',
         'reports/report_edustudent.xml',
