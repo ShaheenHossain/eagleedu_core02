@@ -47,14 +47,14 @@
         <field name="arch" type="xml">
             <form string="Student registration">
                     <header>
-                     <button name="send_to_approve" type="object" class="oe_highlight"
-                            string="Send for Approve" groups="base.group_user"
+                     <button name="send_to_verify" type="object" class="oe_highlight"
+                            string="Send for Verification" groups="base.group_user"
                             help="Click to send the application for verification purpose"
                             states="draft"/>
-<!--                     <button name="application_verify" type="object" class="oe_highlight"-->
-<!--                            string="Verify Application" groups="base.group_user"-->
-<!--                            help="Click to verify the application and documents"-->
-<!--                            states="verification"/>-->
+                     <button name="application_verify" type="object" class="oe_highlight"
+                            string="Verify Application" groups="base.group_user"
+                            help="Click to verify the application and documents"
+                            states="verification"/>
                      <button name="create_student" string="Create Student"
                                 type="object" class="oe_highlight"
                                 help="Click to create Student"

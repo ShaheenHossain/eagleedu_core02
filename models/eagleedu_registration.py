@@ -30,16 +30,8 @@ class EagleeduRegistration(models.Model):
         res = super(EagleeduRegistration, self).create(vals)
         return res
 
-    # @api.multi
-    # def send_to_verify(self):
-    #     """Button action for sending the application for the verification"""
-    #     for rec in self:
-    #         rec.write({
-    #             'state': 'verification'
-    #         })
-
     @api.multi
-    def send_to_approve(self):
+    def send_to_verify(self):
         """Button action for sending the application for the verification"""
         for rec in self:
             rec.write({
