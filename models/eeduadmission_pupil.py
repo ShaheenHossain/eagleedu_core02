@@ -3,9 +3,9 @@ from odoo import fields, models, api, _
 class EeduadmissionPupil(models.Model):
     _name = 'eeduadmission.pupil'
     # _inherit = ['mail.thread']
-    _inherits = {'res.partner': 'partner_id'}
-    _description = 'Student record'
-    _rec_name = 'name'
+    # _inherits = {'res.partner': 'partner_id'}
+    # _description = 'Student record'
+    # _rec_name = 'name'
 
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
@@ -89,8 +89,11 @@ class EeduadmissionPupil(models.Model):
 
 
 
-class EedustudentResPartner(models.Model):
+class EeduadmissionResPartner(models.Model):
     _inherit = 'res.partner'
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19)
     is_pupil = fields.Boolean(string="Is a Student")
-    # is_parent = fields.Boolean(string="Is a Parent")
+#     # is_parent = fields.Boolean(string="Is a Parent")
+
+class EeduadmissionInstitute(models.Model):
+    _inherit = 'res.company'

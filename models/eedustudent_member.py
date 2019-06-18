@@ -15,7 +15,7 @@ class EedustudentMember(models.Model):
             if not recs:
                 recs = self.search([('admission_no', operator, name)] + (args or []), limit=limit)
             if not recs:
-                recs = self.search([('student_id', operator, name)] + (args or []), limit=limit)
+                recs = self.search([('member_id', operator, name)] + (args or []), limit=limit)
             return recs.name_get()
         return super(EedustudentMember, self).name_search(name, args=args, operator=operator, limit=limit)
 
@@ -81,7 +81,7 @@ class EedustudentMember(models.Model):
     religious_id = fields.Many2one('eedustudent.religious', string="Religious", help="My Religion is ")
     admission_no = fields.Char(string="Admission Number", readonly=True)
 
-    student_id=fields.Char('Student Id')
+    member_id=fields.Char('Member Id')
     section_id=fields.Integer('section_id')
     roll_no = fields.Integer('Roll No')
 

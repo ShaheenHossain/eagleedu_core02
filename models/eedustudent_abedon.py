@@ -145,7 +145,7 @@ class EedustudentAbedon(models.Model):
                 'name': _('Member'),
                 'view_type': 'form',
                 'view_mode': 'form',
-                'res_model': 'eedustudent.student',
+                'res_model': 'eedustudent.member',
                 'type': 'ir.actions.act_window',
                 'res_id': member.id,
                 'context': self.env.context
@@ -175,5 +175,5 @@ class EedustudentOrganization(models.Model):
 class EedustudentResPartner(models.Model):
     _inherit = 'res.partner'
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19)
-    is_pupil = fields.Boolean(string="Is a Pupil")
+    is_pupil = fields.Boolean(string="Is a Member")
 #    is_parent = fields.Boolean(string="Is a Parent")

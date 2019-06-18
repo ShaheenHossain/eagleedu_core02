@@ -30,6 +30,8 @@
         'views/eeduadmission_pupil.xml',
         'views/eedustudent_student.xml',
         'views/eedustudent_member.xml',
+        'views/eagleedu_registration.xml',
+        'views/eagleedu_student.xml',
         'views/templates.xml',
         'reports/print_reports.xml',
         'reports/report_edustudent.xml',

@@ -53,11 +53,11 @@
                                 class="oe_stat_button" icon="fa-calendar" string="Documents">
                         </button>
                     </div>
-                    <field name="image" widget="image" class="oe_left oe_avatar" />
+                    <field name="st_image" widget="image" class="oe_left oe_avatar" />
                     <div class="oe_title">
                         <h3>
                             <label for ='pupil_id'/>
-                            <field name="admission_no" attrs="{'invisible': [('pupil_id', '!=','')]}"/>
+                            <field name="admission_no"/>
                             <field name="pupil_id" />
                         </h3>
                         <h2>
@@ -120,7 +120,21 @@
                 Create the your first student here.
             </p>
         </field>
+
     </record>
+        <record id="seq_eedupupil_member" model="ir.sequence">
+        <field name="name">Pupil Seq</field>
+        <field name="res_model">eeduadmission.pupil</field>
+        <field name="code">eeduadmission.pupil</field>
+        <field name="prefix">PN</field>
+        <field name="number_increment">1</field>
+        <field name="padding">4</field>
+    </record>
+
+
+
+
+
     <menuitem id="eedustudent_parent_menu_id" name="Eedu Education" sequence="10"/>
 
     <menuitem id="eedustudent_abedon_menu_id" name="Student abedon"
@@ -128,6 +142,33 @@
 
     <menuitem id="eeduadmission_pupil_menu_id" name="Admission Pupil"
             parent="eedustudent_parent_menu_id" action="action_eeduadmission_pupil"/>
+
+
+    <record id="eedusadmission_pupil_view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="priority" eval="1"/>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='internal_notes']" position="before">
+                    <page name='eeduadmission' string="Education">
+                        <group name="container_education">
+                            <group string="Pupil" name="pupil">
+                                <field name="is_student"/>
+                            </group>
+                            <group string="Parent" name="parent">
+<!--                                <field name="is_parent"/>-->
+                            </group>
+
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+
+
 
 </odoo>
 

@@ -36,7 +36,7 @@
         <field name="arch" type="xml">
             <tree string="Student">
                 <field name="admission_no"/>
-                <field name="student_id"/>
+                <field name="member_id"/>
                 <field name="st_name"/>
             </tree>
         </field>
@@ -46,7 +46,7 @@
         <field name="name">eedustudent.member.form</field>
         <field name="model">eedustudent.member</field>
         <field name="arch" type="xml">
-            <form string="Student">
+            <form string="Member">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button name="student_documents" type="object" widget="statinfo"
@@ -56,10 +56,13 @@
                     <field name="st_image" widget="image" class="oe_left oe_avatar" />
                     <div class="oe_title">
                         <h3>
-                            <label for ='student_id'/>
+                            <label for ='member_id'/>
                             <field name="admission_no"/>
 <!--                            attrs="{'invisible': [('student_id', '!=','')]}-->
-                            <field name="student_id" />
+                            <field name="member_id" />
+                            <field name="nationality" />
+                            <field name="country_id" />
+                            <field name="per_country_id" />
                         </h3>
                         <h2>
                             <table>
@@ -74,9 +77,9 @@
                         </h2>
                     </div>
                     <notebook>
-                        <page string="Student Details">
+                        <page string="Member Details">
                             <separator string="Basic Details"/>
-                            <separator string="Student Info"/>
+                            <separator string="Member Info"/>
                             <group>
                                 <group>
                                     <field name="st_father_name"/>
@@ -97,11 +100,11 @@
     </record>
 
     <record id="eedustudent_member_search" model="ir.ui.view">
-        <field name="name">Student</field>
+        <field name="name">Member</field>
         <field name="model">eedustudent.member</field>
         <field name="arch" type="xml">
             <search string="Search Students">
-                <field name="student_id"/>
+                <field name="member_id"/>
                 <group expand='0' string='Group by...'>
                     <filter string='Religious' icon="fa-pencil-square-o" domain="[]" context="{'group_by' : 'religious_id'}"/>
                </group>
@@ -153,7 +156,7 @@
                 <xpath expr="//page[@name='internal_notes']" position="before">
                     <page name='eedumember' string="Education">
                         <group name="container_education">
-                            <group string="Student" name="student">
+                            <group string="Member" name="member">
                                 <field name="is_student"/>
                             </group>
                             <group string="Parent" name="parent">
