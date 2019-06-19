@@ -39,6 +39,15 @@ class EagleeduRegistration(models.Model):
             })
 
     @api.multi
+    def application_verify(self):
+        """Button action for sending the application for the verification"""
+        for rec in self:
+            rec.write({
+                'state': 'approve'
+            })
+
+
+    @api.multi
     def create_student(self):
         """Create student from the application and data and return the student"""
         for rec in self:
