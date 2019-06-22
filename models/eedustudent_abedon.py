@@ -6,17 +6,13 @@ class EedustudentAbedon(models.Model):
     _name = 'eedustudent.abedon'
     _description = 'abedons for the admission'
     _order = 'id desc'
-    # _rec_name = 'name'
-    # _inherit = ['mail.thread']
-
-    #_inherit = 'res.partner'
 
     st_abedon_id = fields.Char(string="Abedon No", readonly=True, required=True, copy=False, default='New')
 
     abedon_date = fields.Datetime('Application Date', default=lambda
         self: fields.datetime.now())  # , default=fields.Datetime.now, required=True
 
-    st_name = fields.Char(string='Student Name', required=True, help="Enter Name of Student")
+    name = fields.Char(string='Student Name', required=True, help="Enter Name of Student")
     st_name_b = fields.Char(string='Student Bangla Name')
     st_image = fields.Binary(string='Image', help="Provide the image of the Student")
     st_father_name = fields.Char(string="Father's Name", help="Proud to say my father is", required=False)
@@ -77,10 +73,10 @@ class EedustudentAbedon(models.Model):
     @api.model
     def create(self, vals):
     #     """Overriding the create method and assigning the the sequence for the record"""
-         if vals.get('st_abedon_id', 'New') == 'New':
-            vals['st_abedon_id'] = self.env['ir.sequence'].next_by_code('eedustudent.abedon') or 'New'
-         result = super(EedustudentAbedon, self).create(vals)
-         return result
+        if vals.get('st_abedon_id', _('New')) == _('New'):
+            vals['st_abedon_id'] = self.env['ir.sequence'].next_by_code('eedustudent.abedon') or _('New')
+        res = super(EedustudentAbedon, self).create(vals)
+        return res
 
 
     @api.multi
@@ -91,6 +87,7 @@ class EedustudentAbedon(models.Model):
                 'status': 'verification'
             })
 
+
     @api.multi
     def for_verify(self):
         """Return the state to done if the documents are perfect"""
@@ -100,12 +97,13 @@ class EedustudentAbedon(models.Model):
             })
 
 
+
     @api.multi
     def create_student(self):
         """Create student from the application and data and return the student"""
         for rec in self:
             values = {
-                'st_name': rec.st_name,
+                'name': rec.name,
                 'st_name_b': rec.st_name_b,
                 'st_abedon_id': rec.id,
                 'st_father_name': rec.st_father_name,
@@ -132,22 +130,22 @@ class EedustudentAbedon(models.Model):
                 'per_country_id': rec.per_country_id,
                 'guardian_name': rec.guardian_name,
                 'religious_id': rec.religious_id,
-                'is_student': True,
+                # 'is_student': True,
                 'student_id': rec.student_id,
                 'roll_no': rec.roll_no,
                 'st_abedon_id': rec.st_abedon_id,
             }
-            member = self.env['eedustudent.member'].create(values)
+            student = self.env['eedustudent.student'].create(values)
             rec.write({
                 'status': 'done'
             })
             return {
-                'name': _('Member'),
+                'name': _('Student'),
                 'view_type': 'form',
                 'view_mode': 'form',
-                'res_model': 'eedustudent.member',
+                'res_model': 'eedustudent.student',
                 'type': 'ir.actions.act_window',
-                'res_id': member.id,
+                'res_id': student.id,
                 'context': self.env.context
             }
 
@@ -171,9 +169,3 @@ class EedustudentAcademicyear(models.Model):
 
 class EedustudentOrganization(models.Model):
     _inherit = 'res.company'
-
-class EedustudentResPartner(models.Model):
-    _inherit = 'res.partner'
-    country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19)
-    is_pupil = fields.Boolean(string="Is a Member")
-#    is_parent = fields.Boolean(string="Is a Parent")

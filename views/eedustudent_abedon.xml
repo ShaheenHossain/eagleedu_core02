@@ -28,7 +28,7 @@
                               <h3>
                                 <group>
                                   <field name="st_abedon_id"/>
-                                  <field name="st_name" placeholder="Student Name English (CAPITAL)" required="1"/>
+                                  <field name="name" placeholder="Student Name English (CAPITAL)" required="1"/>
                                   <field name="st_name_b" placeholder="বাংলায় শিক্ষার্থীর নাম"/>
                                 </group>
                               </h3>
@@ -101,7 +101,7 @@
         <field name="arch" type="xml">
                <tree string="Abedon No.">
                     <field name="st_abedon_id"/>
-                    <field name="st_name"/>
+                    <field name="name"/>
                     <field name="date_of_birth"/>
                     <field name="st_father_name"/>
                     <field name="st_mother_name"/>

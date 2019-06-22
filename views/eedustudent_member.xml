@@ -146,27 +146,5 @@
     <menuitem id="eedustudent_member_menu_id" name="Admission Member"
             parent="eedustudent_parent_menu_id" action="action_eedustudent_member"/>
 
-
-    <record id="eedustudent_member_view_partner_form" model="ir.ui.view">
-            <field name="name">res.partner.form</field>
-            <field name="model">res.partner</field>
-            <field name="priority" eval="1"/>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//page[@name='internal_notes']" position="before">
-                    <page name='eedumember' string="Education">
-                        <group name="container_education">
-                            <group string="Member" name="member">
-                                <field name="is_student"/>
-                            </group>
-                            <group string="Parent" name="parent">
-<!--                                <field name="is_parent"/>-->
-                            </group>
-
-                        </group>
-                    </page>
-                </xpath>
-            </field>
-        </record>
 </odoo>
 

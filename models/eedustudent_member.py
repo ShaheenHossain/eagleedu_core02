@@ -29,8 +29,8 @@ class EedustudentMember(models.Model):
         res = super(EedustudentMember, self).create(vals)
         return res
 
-    partner_id = fields.Many2one(
-        'res.partner', string='Partner', required=True, ondelete="cascade")
+    # partner_id = fields.Many2one(
+    #     'res.partner', string='Partner', required=True, ondelete="cascade")
 
     abedon_date = fields.Datetime('Application Date', default=lambda
         self: fields.datetime.now())  # , default=fields.Datetime.now, required=True
@@ -96,11 +96,11 @@ class EedustudentMember(models.Model):
 
 
 
-class EedustudentResMember(models.Model):
-    _inherit = 'res.partner'
-    country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19)
-    is_student = fields.Boolean(string="Is a Student")
-    # is_parent = fields.Boolean(string="Is a Parent")
-
-class EedustudentCampus(models.Model):
-    _inherit = 'res.company'
+# class EedustudentResMember(models.Model):
+#     _inherit = 'res.partner'
+#     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19)
+#     is_student = fields.Boolean(string="Is a Student")
+#     # is_parent = fields.Boolean(string="Is a Parent")
+#
+# class EedustudentCampus(models.Model):
+#     _inherit = 'res.company'

@@ -2,26 +2,25 @@ from odoo import fields, models, api, _
 
 class EedustudentStudent(models.Model):
     _name = 'eedustudent.student'
+    _inherits = {'res.partner': 'partner_id'}
     # _inherit = ['mail.thread']
-    _inherits = {'res.partner':'partner_id'}
     _description = 'Student record 01'
-    # _rec_name = 'name'
+    _order = 'id desc'
+    _rec_name = 'name'
 
 
     @api.model
-    def name_search(self, st_name, args=None, operator='ilike', limit=100):
+    def name_search(self, name, args=None, operator='ilike', limit=100):
         if name:
-            recs = self.search([('st_name', operator, st_name)] + (args or []), limit=limit)
+            recs = self.search([('name', operator, name)] + (args or []), limit=limit)
             if not recs:
-                recs = self.search([('admission_no', operator, _st_name)] + (args or []), limit=limit)
+                recs = self.search([('admission_no', operator, _name)] + (args or []), limit=limit)
             if not recs:
-                recs = self.search([('student_id', operator, st_name)] + (args or []), limit=limit)
+                recs = self.search([('student_id', operator, name)] + (args or []), limit=limit)
             return recs.name_get()
-        return super(EedustudentStudent, self).name_search(st_name, args=args, operator=operator, limit=limit)
+        return super(EedustudentStudent, self).name_search(name, args=args, operator=operator, limit=limit)
 
 
-    # # _inherit = ['mail.thread']
-    #
     @api.model
     def create(self, vals):
         """Over riding the create method to assign sequence for the newly creating the record"""
@@ -35,7 +34,6 @@ class EedustudentStudent(models.Model):
     abedon_date = fields.Datetime('Application Date', default=lambda
         self: fields.datetime.now())  # , default=fields.Datetime.now, required=True
 
-    st_name = fields.Char(string='Student Name', required=True, help="Enter Name of Student")
     st_name_b = fields.Char(string='Student Bangla Name')
     st_image = fields.Binary(string='Image', help="Provide the image of the Student")
     st_father_name = fields.Char(string="Father's Name", help="Proud to say my father is", required=False)
@@ -85,22 +83,11 @@ class EedustudentStudent(models.Model):
     section_id=fields.Integer('section_id')
     roll_no = fields.Integer('Roll No')
 
-    status = fields.Selection([('draft', 'Draft'), ('verification', 'Verify'),
-                               ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
-                              string='Status', required=True, default='draft', track_visibility='onchange')
-    _sql_constraints = [
-        ('admission_no', 'unique(admission_no)', "Another Student already exists with this admission number!"),
-        ('roll_no', 'unique(section_id,roll_no)', "Another Student already exists with this Roll Number!"),
-        ('unique_student_id', 'unique(student_id)', 'Student Id must be unique'),
-    ]
+    # _sql_constraints = [
+    #     ('admission_no', 'unique(admission_no)', "Another Student already exists with this admission number!"),
+    #     ('roll_no', 'unique(section_id,roll_no)', "Another Student already exists with this Roll Number!"),
+    #     ('unique_student_id', 'unique(student_id)', 'Student Id must be unique'),
+    # ]
 
 
 
-class EedustudentResPartner(models.Model):
-    _inherit = 'res.partner'
-    country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19)
-    is_student = fields.Boolean(string="Is a Student")
-    # is_parent = fields.Boolean(string="Is a Parent")
-
-class EedustudentOrganization(models.Model):
-    _inherit = 'res.company'

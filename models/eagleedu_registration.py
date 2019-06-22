@@ -6,20 +6,72 @@ class EagleeduRegistration(models.Model):
     _order = 'id desc'
 
     name = fields.Char(sting = 'Student Name', required=True)
-    registration_no = fields.Char(string='registration  No', required=True, copy=False, readonly=True,
+    st_name_b = fields.Char(string='Student Bangla Name')
+    date_of_birth = fields.Date(string="Date Of birth")
+    st_gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('other', 'Other')],
+                                string='Gender', required=False, track_visibility='onchange')
+    st_blood_group = fields.Selection([('a+', 'A+'), ('a-', 'A-'), ('b+', 'B+'), ('o+', 'O+'), ('o-', 'O-'),
+                                    ('ab-', 'AB-'), ('ab+', 'AB+')], string='Blood Group', track_visibility='onchange')
+    st_passport_no = fields.Char(string="Passport No.", help="Proud to say my father is", required=False)
+    registration_no = fields.Char(string='Registration No', required=True, copy=False, readonly=True,
                        index=True, default=lambda self: _('New'))
+    registration_date = fields.Datetime('Registration Date', default=lambda
+        self: fields.datetime.now())  # , default=fields.Datetime.now, required=True
+
+    wish_to_admit = fields.Many2one('eagleedu.wishtoadmit', string='Wish to Admit')
+
     st_image = fields.Binary(string='Image', help="Provide the image of the Student")
+    st_father_name = fields.Char(string="Father's Name", help="Proud to say my father is", required=False)
+    st_father_name_b = fields.Char(string="বাবার নাম", help="Proud to say my father is")
+    st_father_occupation = fields.Char(string="Father's Occupation", help="father Occupation")
+    st_father_email = fields.Char(string="Father's Email", help="father Occupation")
+    father_mobile = fields.Char(string="Father's Mobile No", help="Father's Mobile No")
+    st_mother_name = fields.Char(string="Mother's Name", help="Proud to say my mother is", required=False)
+    st_mother_name_b = fields.Char(string="মা এর নাম", help="Proud to say my mother is")
+    st_mother_occupation = fields.Char(string="Mother Occupation", help="Proud to say my mother is")
+    st_mother_email = fields.Char(string="Mother Email", help="Proud to say my mother is")
+    mother_mobile = fields.Char(string="Mother's Mobile No", help="mother's Mobile No")
+    academic_year = fields.Many2one('eagleedu.academicyear', string='Academic Year')
+
+    house_no = fields.Char(string='House No.', help="Enter the House No.")
+    road_no = fields.Char(string='Area/Road No.', help="Enter the Area or Road No.")
+    post_office = fields.Char(string='Post Office', help="Enter the Post Office Name")
+    city = fields.Char(string='City', help="Enter the City name")
+    bd_division_id = fields.Many2one('eagleedu.bddivision', string= 'Division')
+    country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19)
+
+    if_same_address = fields.Boolean(string="Permanent Address same as above", default=True)
+    per_village = fields.Char(string='Village Name', help="Enter the Village Name")
+    per_po = fields.Char(string='Post Office Name', help="Enter the Post office Name ")
+    per_ps = fields.Char(string='Police Station', help="Enter the Police Station Name")
+    per_dist_id = fields.Many2one('eagleedu.bddistrict', string='District', help="Enter the City of District name")
+    per_country_id = fields.Many2one('res.country', string='Country', ondelete='restrict', default=19)
+
+    guardian_name = fields.Char(string="Guardian's Name", help="Proud to say my guardian is")
+    guardian_relation = fields.Many2one('eagleedu.guardian.relation', string="Guardian's Relation", help="Proud to say my guardian is")
+    guardian_mobile = fields.Char(string="Guardian's Mobile")
+    guardian_name = fields.Char(string="Guardian's Name")
+
+    religious_id = fields.Many2one('eagleedu.religious', string="Religious", help="My Religion is ")
+    student_id=fields.Char('Student Id')
+    roll_no = fields.Integer('Roll No')
+    section=fields.Char('Section')
+
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.user.company_id)
-    email = fields.Char(string="student Email", help="Enter E-mail id for contact purpose")
-    phone = fields.Char(string="student Phone", help="Enter Phone no. for contact purpose")
+    email = fields.Char(string="Student Email", help="Enter E-mail id for contact purpose")
+    phone = fields.Char(string="Student Phone", help="Enter Phone no. for contact purpose")
     mobile = fields.Char(string="Student Mobile", help="Enter Mobile num for contact purpose")
     nationality = fields.Many2one('res.country', string='Nationality', ondelete='restrict',default=19,
                                   help="Select the Nationality")
 
 
-    state = fields.Selection([('draft', 'Draft'), ('verification', 'Verify'),
-                              ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
+    state = fields.Selection([('draft', 'Draft'), ('verification', 'Verify'), ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
                              string='State', required=True, default='draft', track_visibility='onchange')
+
+    # _sql_constraints = [
+    #     ('unique_student_id', 'unique(student_id)', 'Student Id must be unique'),
+    # ]
+
 
 
     @api.model
@@ -54,6 +106,14 @@ class EagleeduRegistration(models.Model):
             values = {
                 'name': rec.name,
                 'registration_no': rec.registration_no,
+                'st_image': rec.st_image,
+                'company_id': rec.company_id.id,
+                'email':rec.email,
+                'phone':rec.phone,
+                'mobile':rec.mobile,
+                'nationality': rec.nationality.id,
+
+
 
             }
             student = self.env['eagleedu.student'].create(values)
@@ -69,3 +129,28 @@ class EagleeduRegistration(models.Model):
                 'res_id': student.id,
                 'context': self.env.context
             }
+
+
+class EagleeduBddivision(models.Model):
+    _name = 'eagleedu.bddivision'
+    name = fields.Char()
+
+class EagleeduBddistrict(models.Model):
+    _name = 'eagleedu.bddistrict'
+    name = fields.Char()
+
+class EagleeduReligious(models.Model):
+    _name = 'eagleedu.religious'
+    name = fields.Char()
+
+class EagleeduAcademicyear(models.Model):
+    _name = 'eagleedu.academicyear'
+    name = fields.Char()
+
+class EagleeduGuardianRelation(models.Model):
+    _name = 'eagleedu.guardian.relation'
+    name = fields.Char()
+
+class EagleeduWishtoadmit(models.Model):
+    _name = 'eagleedu.wishtoadmit'
+    name = fields.Char()
