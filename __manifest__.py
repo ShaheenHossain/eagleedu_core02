@@ -20,16 +20,14 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/eedustudent_abedon.xml',
-        'views/eeduadmission_pupil.xml',
         'views/eedustudent_student.xml',
-        'views/eedustudent_member.xml',
         'views/eagleedu_registration.xml',
         'views/eagleedu_student.xml',
         'views/templates.xml',

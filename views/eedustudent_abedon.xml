@@ -7,19 +7,16 @@
         <field name="arch" type="xml">
             <form string="Student abedon">
                 <header>
-
                      <button name="approve_call" type="object" class="oe_highlight"
                             string="Send for Verification" groups="base.group_user"
-                             status="draft"/>
+                             states="draft"/>
                      <button name="for_verify" type="object" class="oe_highlight"
                             string="Verify Application Form" groups="base.group_user"
-                             status="verification"/>
+                             states="verification"/>
                      <button name="create_student" type="object" class="oe_highlight"
                             string="Admit Student" groups="base.group_user"
-                             status="done"/>
-
-
-                    <field name='status' widget="statusbar" statusbar_visible="draft,verification,approve,done"/>
+                             states="done"/>
+                    <field name='state' widget="statusbar" statusbar_visible="draft,verification,approve,done"/>
 
                 </header>
                     <sheet>
@@ -76,7 +73,7 @@
 
                                 </group>
                         <footer>
-                            <field name='status' widget="statusbar" statusbar_visible="draft,verification,approve,done"/>
+                            <field name='state' widget="statusbar" statusbar_visible="draft,verification,approve,done"/>
 
                         </footer>
                     </sheet>

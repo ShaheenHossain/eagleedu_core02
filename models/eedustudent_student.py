@@ -3,7 +3,7 @@ from odoo import fields, models, api, _
 class EedustudentStudent(models.Model):
     _name = 'eedustudent.student'
     _inherits = {'res.partner': 'partner_id'}
-    # _inherit = ['mail.thread']
+    _inherit = ['mail.thread']
     _description = 'Student record 01'
     _order = 'id desc'
     _rec_name = 'name'
@@ -62,6 +62,7 @@ class EedustudentStudent(models.Model):
     post_office = fields.Char(string='Post Office', help="Enter the Post Office Name")
     city = fields.Char(string='City', help="Enter the City name")
     bd_division_id = fields.Many2one('eedustudent.bddivision', string= 'Division')
+    company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.user.company_id)
 
     country_id = fields.Many2one('res.country', string='Country', ondelete='restrict',default=19,
                                  help="Select the Country")

@@ -4,6 +4,8 @@ class EagleeduRegistration(models.Model):
     _name = 'eagleedu.registration'
     _description = 'This the Registration for student'
     _order = 'id desc'
+    _inherit = ['mail.thread']
+
 
     name = fields.Char(sting = 'Student Name', required=True)
     st_name_b = fields.Char(string='Student Bangla Name')

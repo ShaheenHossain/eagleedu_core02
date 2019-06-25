@@ -7,6 +7,7 @@ class EedustudentAbedon(models.Model):
     _description = 'abedons for the admission'
     _order = 'id desc'
 
+
     st_abedon_id = fields.Char(string="Abedon No", readonly=True, required=True, copy=False, default='New')
 
     abedon_date = fields.Datetime('Application Date', default=lambda
@@ -61,8 +62,8 @@ class EedustudentAbedon(models.Model):
     student_id=fields.Char('Student Id')
     roll_no = fields.Integer('Roll No')
     section=fields.Char('Section')
-    status = fields.Selection([('draft', 'Draft'), ('verification', 'Verify'),
-                               ('approve', 'Approve'), ('reject', 'Reject'), ('done', 'Done')],
+    state = fields.Selection([('draft', 'Draft'), ('verification', 'Verify'),
+                               ('approve', 'Approve'), ('done', 'Done')],
                               string='Status', required=True, default='draft', track_visibility='onchange')
 
     # _sql_constraints = [
@@ -84,7 +85,7 @@ class EedustudentAbedon(models.Model):
         """Return the state to done if the documents are perfect"""
         for rec in self:
             rec.write({
-                'status': 'verification'
+                'state': 'verification'
             })
 
 
@@ -93,7 +94,7 @@ class EedustudentAbedon(models.Model):
         """Return the state to done if the documents are perfect"""
         for rec in self:
             rec.write({
-                'status': 'approve'
+                'state': 'approve'
             })
 
 
@@ -115,19 +116,19 @@ class EedustudentAbedon(models.Model):
                 'st_gender': rec.st_gender,
                 'date_of_birth': rec.date_of_birth,
                 'st_blood_group': rec.st_blood_group,
-                'nationality': rec.nationality,
+                'nationality': rec.nationality.id,
                 'academic_year': rec.academic_year,
                 'house_no': rec.house_no,
                 'road_no': rec.road_no,
                 'post_office': rec.post_office,
                 'city': rec.city,
                 'bd_division_id': rec.bd_division_id,
-                'country_id': rec.country_id,
+                'country_id': rec.country_id.id,
                 'per_village': rec.per_village,
                 'per_po': rec.per_po,
                 'per_ps': rec.per_ps,
                 'per_dist_id': rec.per_dist_id,
-                'per_country_id': rec.per_country_id,
+                'per_country_id': rec.per_country_id.id,
                 'guardian_name': rec.guardian_name,
                 'religious_id': rec.religious_id,
                 # 'is_student': True,
@@ -137,7 +138,7 @@ class EedustudentAbedon(models.Model):
             }
             student = self.env['eedustudent.student'].create(values)
             rec.write({
-                'status': 'done'
+                'state': 'done'
             })
             return {
                 'name': _('Student'),
