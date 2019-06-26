@@ -7,18 +7,22 @@
         <field name="arch" type="xml">
             <form string="Student abedon">
                 <header>
-                     <button name="approve_call" type="object" class="oe_highlight"
-                            string="Send for Verification" groups="base.group_user"
-                             states="draft"/>
-                     <button name="for_verify" type="object" class="oe_highlight"
-                            string="Verify Application Form" groups="base.group_user"
-                             states="verification"/>
-                     <button name="create_student" type="object" class="oe_highlight"
-                            string="Admit Student" groups="base.group_user"
-                             states="done"/>
-                    <field name='state' widget="statusbar" statusbar_visible="draft,verification,approve,done"/>
+                   <button name="send_to_verify" type="object" class="oe_highlight"
+                     string="Send for Verification" groups="base.group_user"
+                     help="Click to send the application for verification purpose"
+                     states="draft"/>
+                   <button name="application_verify" type="object" class="oe_highlight"
+                     string="Verify Application" groups="base.group_user"
+                     help="Click to verify the application and documents"
+                     states="verification"/>
+                   <button name="create_student" string="Create Student"
+                     type="object" class="oe_highlight"
+                     help="Click to create Student"
+                     states="approve"/>
+                     <field name="state" widget="statusbar" statusbar_visible="draft,verify,approve,done"/>
+                 </header>
 
-                </header>
+
                     <sheet>
                          <field name="st_image" widget="image" class="oe_avatar"/>
                             <div col="8" class = "oe_title">

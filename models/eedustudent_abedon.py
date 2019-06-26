@@ -81,7 +81,7 @@ class EedustudentAbedon(models.Model):
 
 
     @api.multi
-    def approve_call(self):
+    def send_to_verify(self):
         """Return the state to done if the documents are perfect"""
         for rec in self:
             rec.write({
@@ -90,7 +90,7 @@ class EedustudentAbedon(models.Model):
 
 
     @api.multi
-    def for_verify(self):
+    def application_verify(self):
         """Return the state to done if the documents are perfect"""
         for rec in self:
             rec.write({
