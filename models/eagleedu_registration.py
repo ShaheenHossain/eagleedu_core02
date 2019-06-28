@@ -20,8 +20,6 @@ class EagleeduRegistration(models.Model):
     registration_date = fields.Datetime('Registration Date', default=lambda
         self: fields.datetime.now())  # , default=fields.Datetime.now, required=True
 
-    wish_to_admit = fields.Many2one('eagleedu.wishtoadmit', string='Wish to Admit')
-
     st_image = fields.Binary(string='Image', help="Provide the image of the Student")
     st_father_name = fields.Char(string="Father's Name", help="Proud to say my father is", required=False)
     st_father_name_b = fields.Char(string="বাবার নাম", help="Proud to say my father is")
@@ -33,7 +31,7 @@ class EagleeduRegistration(models.Model):
     st_mother_occupation = fields.Char(string="Mother Occupation", help="Proud to say my mother is")
     st_mother_email = fields.Char(string="Mother Email", help="Proud to say my mother is")
     mother_mobile = fields.Char(string="Mother's Mobile No", help="mother's Mobile No")
-    academic_year = fields.Many2one('eagleedu.academicyear', string='Academic Year')
+
 
     house_no = fields.Char(string='House No.', help="Enter the House No.")
     road_no = fields.Char(string='Area/Road No.', help="Enter the Area or Road No.")
@@ -56,8 +54,11 @@ class EagleeduRegistration(models.Model):
 
     religious_id = fields.Many2one('eagleedu.religious', string="Religious", help="My Religion is ")
     student_id=fields.Char('Student Id')
-    roll_no = fields.Integer('Roll No')
-    section=fields.Char('Section')
+    academic_year = fields.Many2one('eagleedu.academicyear', string='Academic Year')
+    standard_class = fields.Many2one('eagleedu.standard_class')
+    group_division = fields.Many2one('eagleedu.group_division')
+    roll_no = fields.Integer('Roll No', help="for import only")
+    section=fields.Char('Section', help="for import only")
 
     company_id = fields.Many2one('res.company', string='Company', default=lambda self: self.env.user.company_id)
     email = fields.Char(string="Student Email", help="Enter E-mail id for contact purpose")
@@ -108,6 +109,9 @@ class EagleeduRegistration(models.Model):
             values = {
                 'name': rec.name,
                 'registration_no': rec.registration_no,
+                'standard_class': rec.standard_class.id,
+                'academic_year': rec.academic_year.id,
+                'group_division': rec.group_division.id,
                 'st_image': rec.st_image,
                 'company_id': rec.company_id.id,
                 'email':rec.email,
@@ -153,6 +157,10 @@ class EagleeduGuardianRelation(models.Model):
     _name = 'eagleedu.guardian.relation'
     name = fields.Char()
 
-class EagleeduWishtoadmit(models.Model):
-    _name = 'eagleedu.wishtoadmit'
+class EagleeduStandardClass(models.Model):
+    _name = 'eagleedu.standard_class'
+    name = fields.Char()
+
+class EagleeduGroupDivission(models.Model):
+    _name = 'eagleedu.group_division'
     name = fields.Char()

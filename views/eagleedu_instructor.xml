@@ -68,8 +68,8 @@
                             <separator string="instructor Info"/>
                             <group>
                                 <group>
-                                    <field name="ins_father_name"/>
-                                    <field name="ins_mother_name"/>
+                                    <field name="ins_father_name" string="Father's Name"/>
+                                    <field name="ins_mother_name" string="Mother's Name"/>
                                     <field name="ins_gender"/>
                                     <field name="ins_date_of_birth"/>
                                 </group>
